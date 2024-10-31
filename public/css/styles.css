@@ -18,13 +18,27 @@ body {
   line-height: 1.6;
   padding: 20px;
 }
+/* Container to Center the Content */
+.container {
+  width: 90%;
+  max-width: 800px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd; /* Soft border for separation */
+}
+.wrapper {
+  background-image: url('/images/site/checkerboard.jpg');
+}
 
-/* Header */
+
+/* Header */ 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  background-color: white;
 }
 
 .header h1 {
@@ -83,25 +97,59 @@ body {
   text-decoration: none;
   border-radius: 4px;
 }
-
 /* Reviews Section */
-.reviews {
-  margin-top: 20px;
-}
-
-.reviews h3 {
+.reviews h3, .upgrades h3 {
   font-size: 18px;
+  margin-top: 20px;
   margin-bottom: 10px;
+  font-weight: 700;
 }
 
 .reviews ul {
-  list-style-type: disc;
-  padding-left: 20px;
+  list-style-type: none;
+  padding-left: 15px;
+}
+
+.reviews li {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+/* Upgrades Section */
+.upgrade-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.upgrade-item {
+  text-align: center;
+  background-color: #ff8c00;
+}
+
+.upgrade-item img {
+  max-width: 100px;
+  margin-bottom: 5px;
+  background-color: #ef9526;
+}
+
+.upgrade-item a {
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.upgrade-item a:hover {
+  color: #ff6600;
 }
 
 
+
 /* Footer */
-.footer {
+.footer.ejs  {
   text-align: center;
   font-size: 12px;
   color: #555;
