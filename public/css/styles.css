@@ -25,7 +25,7 @@ body {
   background: #fff;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ddd; /* Soft border for separation */
+  border: 1px solid #0b0570f4; /* Soft border for separation */
 }
 .wrapper {
   background-image: url('/images/site/checkerboard.jpg');
@@ -149,7 +149,7 @@ body {
 
 
 /* Footer */
-.footer.ejs  {
+.copyright  {
   text-align: center;
   font-size: 12px;
   color: #555;
