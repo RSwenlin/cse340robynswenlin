@@ -52,6 +52,53 @@ body {
   border-radius: 4px;
   font-weight: 500;
 }
+/* Welcome Section */
+.welcome {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.welcome .featured-vehicle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.vehicle-info h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.vehicle-info p {
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #ff8c00;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+/* Reviews Section */
+.reviews {
+  margin-top: 20px;
+}
+
+.reviews h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.reviews ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
 
 /* Footer */
 .footer {
