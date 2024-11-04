@@ -20,15 +20,21 @@ body {
 }
 /* Container to Center the Content */
 .container {
-  width: 90%;
+  width: 80%;
+  height: 80;
   max-width: 800px;
+  margin-left: 80px;
   background: #fff;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #0b0570f4; /* Soft border for separation */
+  border: 5px solid #1810adf4; /* Soft border for separation */
+  border-radius: 15px;
 }
 .wrapper {
-  background-image: url('/images/site/checkerboard.jpg');
+  width: 70%;
+  padding: 25px;
+  background-image: url('/images/site/small_check.jpg');
+  border: 3px solid black;
 }
 
 
