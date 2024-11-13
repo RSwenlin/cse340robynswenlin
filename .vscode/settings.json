@@ -1,0 +1,28 @@
+{
+    "sqltools.connections": [
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "sqlrender",
+            "connectString": "postgresql://cse340swenlin_1:tAjmRU7yfTI550hcFOpkxakUMhSeKP2I@dpg-cqbe565ds78s73aafk20-a.oregon-postgres.render.com/cse340swenlin_1"
+        },
+        {
+            "pgOptions": {
+                "ssl": {
+                    "rejectUnauthorized": true
+                }
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "driver": "PostgreSQL",
+            "name": "render.com",
+            "connectString": "postgresql://cse340rs:L2QhznaY9THf0SS4NBNnZ36K61bBnykV@dpg-cshbbkjqf0us7381ku50-a.oregon-postgres.render.com/cse340rs_3kbm"
+        }
+    ]
+}
