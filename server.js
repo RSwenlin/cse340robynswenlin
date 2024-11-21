@@ -1,5 +1,5 @@
-/* ******************************************
- * This server.js file is the primary file of the 
+/*******************************************/
+/* This server.js file is the primary file of the 
  * application. It is used to control the project.
  *******************************************/
 /* ***********************
@@ -12,6 +12,7 @@ const app = express()
 const static = require("./routes/static")
 const baseController = require("./controllers/baseController")
 const inventoryRoute = require("./routes/inventoryRoute")
+const errorRoute = require("./routes/errorRoute")  // Add this line to require the error route
 const utilities = require('./utilities');
 
 /* ***********************
@@ -20,8 +21,6 @@ const utilities = require('./utilities');
 app.set("view engine", "ejs")
 app.use(expressLayouts)
 app.set("layout", "./layouts/layout") // not at views root
-
-
 
 /* ***********************
  * Routes
@@ -34,11 +33,13 @@ app.get("/", baseController.buildHome)
 // Inventory routes
 app.use("/inv", inventoryRoute)
 
+// Add the new route for the intentional error
+app.use("/error", errorRoute)  // Add this line to use the error route
+
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
-
 
 /* ***********************
 * Express Error Handler
@@ -48,17 +49,19 @@ app.use(async (err, req, res, next) => {
   let nav = await utilities.getNav()
   console.error(`Error at: "${req.originalUrl}": ${err.message}`)
 
-  if(err.status == 404){ message = err.message} else {message = 'Keyboard not found. Press a button on the non-existent keyboard to fix it'}
+  let message;
+  if (err.status === 404) {
+    message = err.message;
+  } else {
+    message = 'An unexpected error occurred. Please try again later.';
+  }
+
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message: message,
-   
     nav
-   
   })
 })
-
-
 
 /* ***********************
  * Local Server Information
