@@ -4,15 +4,20 @@
 
     <body>
         <div id="wrapper">
+            <!-- Include header partial -->
             <%- include('../partials/header') %>
-             <%- include('../partials/navigation') %>
             
-
+            <!-- Include navigation partial -->
+            <%- include('../partials/navigation') %>
+            
             <main>
+                <!-- Main content will go here -->
                 <%- body %>
             </main>
-
+            
+            <!-- Include footer partial -->
             <%- include('../partials/footer') %>
         </div>
     </body>
 </html>
+
