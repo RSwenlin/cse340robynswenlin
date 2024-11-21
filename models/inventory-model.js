@@ -25,6 +25,11 @@ async function getInventoryByClassificationId(classification_id) {
     }
   }
 
+  async function getVehicleById(vehicleId) {
+    const database = db.getDatabase();
+    const collection = database.collection('inventory'); // Adjust for your actual collection name
+    return await collection.findOne({ _id: new ObjectId(vehicleId) }); // Ensure `_id` is an ObjectId
+}
 
 
-module.exports = {getClassifications, getInventoryByClassificationId};
+module.exports = {getClassifications, getInventoryByClassificationId, getVehicleById};
