@@ -52,6 +52,17 @@ a {
 }
 
 /* Navigation */
+nav ul {
+  display: flex;
+  padding: 0 1vw;
+  justify-content: space-around;
+}
+ 
+nav li {
+  list-style: none;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
 nav {
   list-style-type: none;
   width: 100%;
@@ -102,6 +113,7 @@ nav {
 
 .featured-vehicle {
   display: flex;
+  list-style: none;
   justify-content: center;
   align-items: center;
   gap: 20px;

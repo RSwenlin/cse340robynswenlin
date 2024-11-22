@@ -230,6 +230,8 @@ VALUES   (
     'White',
     5
   );
+
+
 -- Add "/vehicles" to image paths
 UPDATE public.inventory
 SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
@@ -237,6 +239,5 @@ SET inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
 
 -- Update GM Hummer description
 UPDATE public.inventory
-SET description = REPLACE(description, 'small interiors', 'a huge interior')
-WHERE model = 'GM Hummer';
-
+SET inv_description = REPLACE('inv_description', 'the small interiors', 'a huge interior')
+WHERE inv_id = 10;
