@@ -32,7 +32,7 @@ async function getInventoryByClassificationId(classification_id) {
             `SELECT * From public.inventory WHERE inv_id = $1`,
             [vehicleId]
         )
-        return data.rows
+        return result.rows[0]
     } catch (error) {
         console.error('Error fetching vehicle by Id:' + error)
     }

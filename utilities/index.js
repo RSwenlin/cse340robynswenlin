@@ -57,17 +57,17 @@ Util.buildClassificationGrid = async function(data){
     return grid
   }
 
-  const buildVehicleHTML = (vehicle) => {
+  Util.buildVehicleHTML = async function(vehicle)  {
     return `
         <div class="vehicle-detail">
-            <img src="${vehicle.image}" alt="${vehicle.make} ${vehicle.model}">
-            <h2>${vehicle.year} ${vehicle.make} ${vehicle.model}</h2>
-            <p>Price: $${vehicle.price.toLocaleString()}</p>
-            <p>Mileage: ${vehicle.mileage.toLocaleString()} miles</p>
-            <p>Description: ${vehicle.description}</p>
+            <img src="${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model}">
+            <h2>${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}</h2>
+            <p>Price: $${vehicle.inv_price}</p>
+            <p>Mileage: ${vehicle.inv_mileage} miles</p>
+            <p>Description: ${vehicle.inv_description}</p>
         </div>
     `;
 };
 
 
-module.exports = Util, buildVehicleHTML
+module.exports = Util
