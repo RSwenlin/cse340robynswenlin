@@ -138,11 +138,18 @@ nav {
 .vehicle-info h3 {
   font-size: 24px;
   color: #877b7b;
+  background-color: white;
 }
 
 .vehicle-info p {
   margin: 10px 0;
   color: #666;
+  background-color: white;
+}
+.vehicle-detail {
+  background-color: white;
+  align-items: center;
+  padding: 30px;
 }
 
 .btn-primary {
@@ -161,6 +168,9 @@ nav {
   list-style: none;
   padding: 50px 50px;
   background-color: white;
+}
+#inv-display h1 {
+  background-color: #e65c00;
 }
 
 /* Reviews Section */
