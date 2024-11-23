@@ -29,18 +29,12 @@ async function getInventoryByClassificationId(classification_id) {
   async function getVehicleById(vehicleId) {
     try {
         const result = await pool.query(
-            `SELECT * From public.inventory WHERE inventory_id = $1`,
-            [vehicleIdId]
-        );
-
-        if (result.rows.length === 0) {
-            return null; 
-        }
-
-        return result.rows[0];
+            `SELECT * From public.inventory WHERE inv_id = $1`,
+            [vehicleId]
+        )
+        return data.rows
     } catch (error) {
-        console.error('Error fetching vehicle by Id:', error);
-        throw error;
+        console.error('Error fetching vehicle by Id:' + error)
     }
   }
 
