@@ -62,8 +62,8 @@ Util.buildClassificationGrid = async function(data){
         <div class="vehicle-detail">
             <img src="${vehicle.inv_image}" alt="${vehicle.inv_make} ${vehicle.inv_model}">
             <h2>${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}</h2>
-            <p>Price: $${vehicle.inv_price}</p>
-            <p>Mileage: ${vehicle.inv_mileage} miles</p>
+            <p>Price: $${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</p>
+            <p>Mileage: ${new Intl.NumberFormat('en-US').format(vehicle.inv_miles)} miles</p>
             <p>Description: ${vehicle.inv_description}</p>
         </div>
     `;
