@@ -9,7 +9,7 @@
 
 body {
   font-family: 'Roboto', Arial, sans-serif;
-  background: url('/images/site/small_check.jpg') repeat; /* Checkerboard background */
+  background: url('/images/site/small_check.jpg') repeat;
   color: #4d4747;
   line-height: 1.6;
   padding: 20px;
@@ -300,6 +300,9 @@ footer .copyright {
   .upgrade-options {
     grid-template-columns: 1fr 1fr;
   }
+ nav ul {
+  display: block;
+ }
 }
 
 
