@@ -14,9 +14,22 @@ body {
   line-height: 1.6;
   padding: 20px;
 }
+main p {
+  display: flex;
+  background-color: white;
+  padding: 20px;
+}
 
-a {
+main a {
+  display: flex;
   text-decoration: none;
+  padding: 20px;
+  background-color: white;
+}
+main h1 {
+  display: flex;
+  background-color: #ff6600;
+  padding: 20px;
 }
 
 .container {
@@ -147,8 +160,10 @@ nav {
   background-color: white;
 }
 .vehicle-detail {
+  max-width: 100%;
   background-color: white;
   align-items: center;
+  overflow: hidden;
   padding: 30px;
 }
 
@@ -183,6 +198,7 @@ nav {
   color: #656161;
   margin-bottom: 20px;
   text-align: center;
+  background-color: black;
 }
 
 .reviews ul {
@@ -234,10 +250,11 @@ nav {
   color: white;
   font-size: 16px;
   font-weight: bold;
+  background-color: black;
 }
 
 .upgrade-item a:hover {
-  color: #333;
+  color: #ff6600;
 }
 
 /* Footer */
@@ -261,10 +278,18 @@ footer .copyright {
   }
 
   .featured-vehicle img {
-    width: 80%;
+    flex: 1 1 100%;
+  }
+  #inv-display {
+    flex-direction: column;
+    align-items: center;
+  }
+  .inv-display .inv-display img {
+    flex: 1 1 100%;
   }
 
-  .vehicle-info {
+  .inv-display p {
+    flex: 1 1 100%;
     text-align: center;
   }
 
@@ -276,5 +301,8 @@ footer .copyright {
     grid-template-columns: 1fr 1fr;
   }
 }
+
+
+
 
 
