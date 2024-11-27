@@ -2,11 +2,11 @@
 const express = require("express")
 const router = new express.Router() 
 const accountController = require('../controllers/accountController')
-const utilities = require('../utilities')
+const utilities = require('../utilities/')
 
 
-router.get('/login', utilities.handleErrors(accountController,
-    buildLogin))
+router.get('/login', utilities.handleErrors(accountController.buildLogin))
+    
 
     /* ***********************
     *   Registration View
@@ -14,5 +14,12 @@ router.get('/login', utilities.handleErrors(accountController,
     *   ********************** */
    
 router.get('/register', utilities.handleErrors(accountController.buildRegister))
+    /* ***********************
+    *   Process Registration
+    *   
+    *   ********************** */
+   
+router.post('/register', utilities.handleErrors(accountController.registerAccount))
 
-    module.exports = router
+
+module.exports = router

@@ -17,6 +17,7 @@ const utilities = require('./utilities');
 const session = require("express-session")
 const pool = require('./database/')
 const accountRoute = require('./routes/accountRoute')
+const bodyParser = require('body-parser')
 
 app.use('/account', accountRoute)
 
@@ -40,6 +41,9 @@ app.use(function(req, res, next){
   res.locals.messages = require('express-messages')(req, res)
   next()
 })
+// process registration
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true}))   //parsing application
 
 
 
@@ -57,16 +61,17 @@ app.set("layout", "./layouts/layout") // not at views root
 app.use(require('./routes/static'))
 
 // Index route
-app.get("/", utilities.handleErrors(baseController.buildHome))
+app.get('/', utilities.handleErrors(baseController.buildHome))
+
 
 // Inventory routes
-app.use("/inv", inventoryRoute)
+app.use('/inv', inventoryRoute)
 
 // Account routes
 app.use('/account', require('./routes/accountRoute'))
 
 // Add the new route for the intentional error
-app.use("/error", errorRoute)  // Add this line to use the error route
+app.use('/error', errorRoute)  // Add this line to use the error route
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
@@ -88,7 +93,7 @@ app.use(async (err, req, res, next) => {
     message = 'An unexpected error occurred. Please try again later.';
   }
 
-  res.render("errors/error", {
+  res.render('errors/error', {
     title: err.status || 'Server Error',
     message: message,
     nav
