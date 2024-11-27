@@ -1,0 +1,17 @@
+
+<h1>Inventory Management</h1>
+<% if (messages.length) { %>
+  <ul>
+    <% messages.forEach(function(message) { %>
+      <li><%= message %></li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<ul>
+  <li><a href="/inv/add-classification">Add New Classification</a></li>
+  <li><a href="/inv/add-inventory">Add New Inventory Item</a></li>
+</ul>
+    
+    <script src="/js/script.js"></script> <!-- Link to your JavaScript file if you have one -->
+
