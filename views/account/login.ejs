@@ -1,13 +1,7 @@
 <div class="loginContainer">
     <h1><%= title %></h1>
+    <%- messages() %>
 
-    <% if (messages) { %>
-      <ul>
-        <% messages.forEach(function(msg) { %>
-          <li><%= msg %></li>
-        <% }) %>
-      </ul>
-    <% } %>
      
     
        <!-- Login form -->
