@@ -16,6 +16,9 @@ const errorRoute = require("./routes/errorRoute")  // Add this line to require t
 const utilities = require('./utilities');
 const session = require("express-session")
 const pool = require('./database/')
+const accountRoute = require('./routes/accountRoute')
+
+app.use('/account', accountRoute)
 
 /* ***********************
  * Middleware
@@ -51,13 +54,16 @@ app.set("layout", "./layouts/layout") // not at views root
 /* ***********************
  * Routes
  *************************/
-app.use(static)
+app.use(require('./routes/static'))
 
 // Index route
-app.get("/", baseController.buildHome)
+app.get("/", utilities.handleErrors(baseController.buildHome))
 
 // Inventory routes
 app.use("/inv", inventoryRoute)
+
+// Account routes
+app.use('/account', require('./routes/accountRoute'))
 
 // Add the new route for the intentional error
 app.use("/error", errorRoute)  // Add this line to use the error route

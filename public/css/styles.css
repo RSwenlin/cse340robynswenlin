@@ -6,6 +6,9 @@
   margin: 0;
   padding: 0;
 }
+.wrapper {
+  background-color: white;
+}
 
 body {
   font-family: 'Roboto', Arial, sans-serif;
@@ -13,6 +16,9 @@ body {
   color: #4d4747;
   line-height: 1.6;
   padding: 20px;
+}
+a {
+  text-decoration: none;
 }
 main p {
   display: flex;
@@ -45,6 +51,7 @@ main h1 {
   align-items: center;
   background-color: #161414;
   padding: 10px 20px;
+  text-decoration: none;
 }
 #inv-title {
   background-color: orange;
@@ -129,6 +136,10 @@ nav {
   margin-bottom: 20px;
   text-align: center;
   
+}
+ .notice li {
+  background-color: white;
+  list-style-type: none;
 }
  
 
@@ -269,6 +280,151 @@ footer .copyright {
   font-size: 12px;
   color: #ccc;
 }
+/* Example styles for the login container */
+.loginContainer {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #333;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.flash-message {
+  margin: 15px 0;
+  padding: 10px;
+  background-color: #f44336;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+/* Basic styling for the registration container */
+#registerContainer {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Style for error messages */
+.errorMessages {
+  color: red;
+  padding: 10px;
+  background-color: #fdd;
+  border: 1px solid red;
+  list-style-type: none;
+  margin: 10px 0;
+}
+
+.errorMessages li {
+  margin-bottom: 5px;
+}
+
+/* Link style */
+a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Small text for password requirements */
+small {
+  display: block;
+  font-size: 0.9em;
+  color: #555;
+}
+
+
 
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {

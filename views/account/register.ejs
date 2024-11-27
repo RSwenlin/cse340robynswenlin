@@ -1,0 +1,12 @@
+<% if (errors && errors.length > 0) { %>
+    <ul class="errorMessages">
+        <% errors.forEach(function(error) { %>
+            <li><%= error.msg %></li>
+        <% }); %>
+    </ul>
+<% } %>
+
+<div id="registerContainer">
+    <p>All fields are required.</p>
+    <form id="registerForm" action="/account/register" method="post"></form>
+</div>
