@@ -19,7 +19,7 @@ const pool = require('./database/')
 const accountRoute = require('./routes/accountRoute')
 const bodyParser = require('body-parser')
 
-app.use('/account', accountRoute)
+
 
 /* ***********************
  * Middleware
@@ -68,7 +68,7 @@ app.get('/', utilities.handleErrors(baseController.buildHome))
 app.use('/inv', inventoryRoute)
 
 // Account routes
-app.use('/account', require('./routes/accountRoute'))
+app.use('/account', utilities.handleErrors(accountRoute))
 
 // Add the new route for the intentional error
 app.use('/error', errorRoute)  // Add this line to use the error route
