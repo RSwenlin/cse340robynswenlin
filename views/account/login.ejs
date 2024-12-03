@@ -1,9 +1,13 @@
-<div class="loginContainer">
+  <% if (title) { %>
     <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+    
     <%- messages() %>
 
      
-    
+    <div class="loginContainer">
        <!-- Login form -->
        <form action="/account/login" method="POST">
         <fieldset>
