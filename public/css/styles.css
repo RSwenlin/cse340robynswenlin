@@ -356,67 +356,101 @@ a:hover {
   background-color: #f9f9f9;
 }
 
-h1 {
+#registerContainer h1 {
   text-align: center;
+  color: #333;
+  margin-bottom: 20px;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-label {
+#registerContainer label {
   display: block;
   font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #555;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 8px;
-  margin: 5px 0 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-button {
+#registerContainer input[type="text"],
+#registerContainer input[type="email"],
+#registerContainer input[type="password"] {
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
-button:hover {
+#registerContainer input:focus {
+  border-color: #ff6600;
+  outline: none;
+  box-shadow: 0px 0px 5px rgba(255, 102, 0, 0.5);
+}
+
+#registerContainer small {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+#registerContainer div {
+  margin-top: 10px;
+  color: #555;
+  font-size: 14px;
+}
+
+#registerContainer button[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#registerContainer button[type="submit"]:hover {
   background-color: #45a049;
 }
 
-/* Style for error messages */
-.errorMessages {
+#registerContainer .errorMessages {
   color: red;
+  font-size: 14px;
   padding: 10px;
   background-color: #fdd;
   border: 1px solid red;
-  list-style-type: none;
-  margin: 10px 0;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
-.errorMessages li {
-  margin-bottom: 5px;
-}
-
-/* Link style */
-a {
+#registerContainer a {
   color: #007BFF;
   text-decoration: none;
 }
 
-a:hover {
+#registerContainer a:hover {
   text-decoration: underline;
 }
 
+#registerContainer #pswdBtn {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #007BFF;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
 /* Small text for password requirements */
 small {
   display: block;
@@ -459,6 +493,10 @@ small {
  nav ul {
   display: block;
  }
+ #registerContainer {
+  width: 90%;
+  padding: 15px;
+}
 }
 
 
