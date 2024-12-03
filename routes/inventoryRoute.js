@@ -2,6 +2,7 @@
 const express = require("express")
 const router = new express.Router() 
 const invController = require("../controllers/invController")
+const utilities = require('../utilities')
 const inventoryModel = require('../models/inventory-model');
 
 // Route to build inventory by classification view (GET)
@@ -24,6 +25,8 @@ router.get("/add-inventory", invController.addInventoryForm);
 
 // Route to process the add inventory form (POST)
 router.post("/add-inventory", invController.processAddInventory);
+
+router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 
 
 module.exports = router;

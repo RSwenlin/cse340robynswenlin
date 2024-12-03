@@ -68,12 +68,12 @@ async function addClassification(classification_name) {
 /* ***************************
  * Add a new inventory item
  * ************************** */
-async function addInventory(vehicle_make, vehicle_model, vehicle_year, classification_id) {
+async function addInventory(vehicle_make, vehicle_model, vehicle_year, classification_id, price, miles, description, color, image) {
   try {
     const result = await pool.query(
-      `INSERT INTO public.inventory (inv_make, inv_model, inv_year, classification_id) 
-       VALUES ($1, $2, $3, $4) RETURNING *`, 
-      [vehicle_make, vehicle_model, vehicle_year, classification_id]
+      `INSERT INTO public.inventory (inv_make, inv_model, inv_year, classification_id, inv_price, inv_miles, inv_description, inv_color, inv_image) 
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`, 
+      [vehicle_make, vehicle_model, vehicle_year, classification_id, price, miles, description, color, image]
     );
     return result.rows[0];  // Return the inserted inventory item
   } catch (error) {

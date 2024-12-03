@@ -102,10 +102,22 @@ invCont.addInventoryForm = async function (req, res) {
  *  Process new inventory form
  * ************************** */
 invCont.processAddInventory = async function (req, res) {
-  const { vehicle_make, vehicle_model, vehicle_year, classification_id } = req.body;
+  const { 
+    vehicle_make,
+    vehicle_model,
+    vehicle_year,
+    classification_id,
+    vehicle_price,
+    vehicle_miles,
+    vehicle_description,
+    vehicle_color,
+    vehicle_image
+ } = req.body;
 
   // Validate form data (basic validation for all fields)
-  if (!vehicle_make || !vehicle_model || !vehicle_year || !classification_id) {
+  if (!vehicle_make || !vehicle_model || !vehicle_year || !classification_id || 
+    !vehicle_price || !vehicle_miles || !vehicle_description ||
+    !vehicle_color || !vehicle_image) {
     req.flash("notice", "All fields are required.");
     return res.redirect("/inv/add-inventory");
   }
@@ -115,7 +127,12 @@ invCont.processAddInventory = async function (req, res) {
     vehicle_make,
     vehicle_model,
     vehicle_year,
-    classification_id
+    classification_id,
+    vehicle_price,
+    vehicle_miles,
+    vehicle_description,
+    vehicle_color,
+    vehicle_image
   );
 
   if (result) {
@@ -133,7 +150,9 @@ invCont.processAddInventory = async function (req, res) {
 invCont.buildManagementView = async function (req, res, next) {
     try {
     let nav = await utilities.getNav();
+
     const classificationSelect = await utilities.buildClassificationList();
+
     res.render("./inventory/management", {
       title: "Vehicle Management",
       nav,
@@ -144,6 +163,20 @@ invCont.buildManagementView = async function (req, res, next) {
     next(err);
 }
   };
+
+/* ***************************
+ *  Return Inventory by Classification As JSON
+ * ************************** */
+invCont.getInventoryJSON = async (req, res, next) => {
+    const classification_id = parseInt(req.params.classification_id)
+    const invData = await invModel.getInventoryByClassificationId(classification_id)
+    if (invData[0].inv_id) {
+      return res.json(invData)
+    } else {
+      next(new Error("No data returned"))
+    }
+  }
+  
   
 
 module.exports = invCont;
