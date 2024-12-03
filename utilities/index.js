@@ -69,6 +69,24 @@ Util.buildClassificationGrid = async function(data){
     `;
 };
 
+Util.buildClassificationList = async function () {
+  try {
+    const data = await invModel.getClassifications();
+    let list = "<select name='classification_id' id='classificationSelect'>";
+    list += `<option value="">Select a Classification</option>`;
+    data.forEach((row) => {
+      list += `<option value="${row.classification_id}">${row.classification_name}</option>`;
+    });
+    list += "</select>";
+    return list;
+  } catch (err) {
+    console.error("Error building classification list:", err);
+    return "<select><option>Error loading classifications</option></select>";
+  }
+};
+
+
+
 /* ****************************************
 * Middleware to check token validity
 **************************************** */

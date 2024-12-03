@@ -11,7 +11,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get('/detail/:inventoryId', invController.getInventoryDetails);
 
 // Route to display the inventory management page (GET)
-//router.get('/management', invController.buildInventoryManagement);
+router.get('/management', invController.buildManagementView);
 
 // Route to display the add classification form (GET)
 router.get("/add-classification", invController.addClassificationForm);
