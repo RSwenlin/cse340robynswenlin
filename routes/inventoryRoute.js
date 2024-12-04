@@ -27,7 +27,7 @@ router.get("/add-inventory", invController.addInventoryForm);
 // Route to process the add inventory form (POST)
 router.post("/add-inventory", invController.processAddInventory);
 
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+router.get("/add-inventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 
 
 module.exports = router;

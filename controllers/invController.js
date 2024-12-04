@@ -148,7 +148,6 @@ invCont.processAddInventory = async function (req, res) {
  *  Build vehicle management view
  * ************************** */
 invCont.buildManagementView = async function (req, res, next) {
-    try {
     let nav = await utilities.getNav();
 
     const classificationSelect = await utilities.buildClassificationList();
@@ -159,10 +158,7 @@ invCont.buildManagementView = async function (req, res, next) {
       errors: null,
       classificationSelect,
     });
-} catch (err) {
-    next(err);
 }
-  };
 
 /* ***************************
  *  Return Inventory by Classification As JSON

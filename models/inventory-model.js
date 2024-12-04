@@ -18,19 +18,19 @@ async function getClassifications() {
  * ************************** */
 async function getInventoryByClassificationId(classification_id) {
   try {
-    const result = await pool.query(
+    const data = await pool.query(
       `SELECT * FROM public.inventory AS i
        JOIN public.classification AS c 
        ON i.classification_id = c.classification_id
        WHERE i.classification_id = $1`, 
       [classification_id]
     );
-    return result.rows;  // Return rows with inventory data
+    return data.rows; 
   } catch (error) {
-    console.error("Error fetching inventory by classification ID:", error);
-    throw error;  // Rethrow to be handled by the controller
+    console.error("getclassificationsbyid error" + error)
   }
 }
+
 
 /* ***************************
  * Get inventory details by vehicle ID
