@@ -627,15 +627,15 @@ small {
   padding: 15px;
 }
 .reviews-upgrades {
-  flex-direction: column; /* Stack sections vertically on smaller screens */
+  flex-direction: column; 
 }
 
 .reviews, .upgrades {
-  margin-bottom: 20px; /* Add spacing between stacked sections */
+  margin-bottom: 20px; 
 }
 
 .upgrade-options {
-  grid-template-columns: 1fr 1fr; /* 2 items per row on small screens */
+  grid-template-columns: 1fr 1fr; 
 }
 .inventory-management {
   padding: 15px;
