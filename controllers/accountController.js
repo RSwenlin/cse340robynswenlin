@@ -111,6 +111,7 @@ async function accountLogin(req, res) {
 
 
     const accountData = await accountModel.getAccountByEmail(account_email)
+    console.log(accountData)
     if (!accountData) {
       req.flash("notice", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
@@ -175,7 +176,7 @@ async function accountManagement(req, res) {
     const errors = req.flash('errors');
 
     // Render the account management page, passing user data and flash messages
-    res.render('account/accountManagement', {
+    res.render('account/management', {
         title: 'Account Management',
         nav,
         userData,  // Pass user data to the view

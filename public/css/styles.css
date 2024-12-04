@@ -501,7 +501,95 @@ small {
   font-size: 0.9em;
   color: #555;
 }
+.inventory-management {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff; /* Solid white background */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
+.inventory-management h1, 
+.inventory-management h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.inventory-management p {
+  font-size: 16px;
+  color: #555;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Action Buttons */
+.inventory-actions {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.inventory-actions .btn {
+  text-decoration: none;
+  font-size: 16px;
+  color: #fff;
+  background-color: #ff6600;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.inventory-actions .btn:hover {
+  background-color: #e65c00;
+}
+
+/* Dropdown */
+.dropdown select {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+/* Inventory Table */
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.inventory-table th, 
+.inventory-table td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+.inventory-table th {
+  background-color: #ff6600;
+  color: white;
+  font-weight: bold;
+}
+
+.inventory-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.inventory-table tr:hover {
+  background-color: #f2f2f2;
+}
 
 
 /* Media Queries for responsiveness */
@@ -549,7 +637,16 @@ small {
 .upgrade-options {
   grid-template-columns: 1fr 1fr; /* 2 items per row on small screens */
 }
+.inventory-management {
+  padding: 15px;
 }
+
+.inventory-actions {
+  flex-direction: column;
+  gap: 10px;
+}
+}
+
 
 
 
