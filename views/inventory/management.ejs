@@ -1,13 +1,7 @@
 
 <h1>Inventory Management</h1>
 
-<% if (messages && messages.length) { %>
-  <ul>
-    <% messages.forEach(function(message) { %>
-      <li><%= message %></li>
-    <% }) %>
-  </ul>
-<% } %>
+<%- messages() %>
 
 <ul>
   <li><a href="/inv/add-classification">Add New Classification</a></li>
@@ -19,12 +13,7 @@
 <p>Select a classification from the list to view the items belonging to that classification:</p>
 
 <!-- Classification list dropdown -->
-<select id="classificationSelect">
-  <option value="">-- Select a Classification --</option>
-  <% classificationSelect.forEach(function(classification) { %>
-    <option value="<%= classification.classification_id %>"><%= classification.classification_name %></option>
-  <% }) %>
-</select>
+<%- classificationSelect %>
 
 <!-- Empty table for inventory items -->
 <table id="inventoryDisplay"></table>

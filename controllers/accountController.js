@@ -36,25 +36,42 @@ async function buildRegister(req, res, next) {
 * *************************************** */
 async function registerAccount(req, res) {
     let nav = await utilities.getNav()
-    const { account_firstname,
-         account_lastname,
+    const {
+        account_firstname,
+        account_lastname,
         account_email,
-        account_password } = req.body
+        account_password
+     } = req.body
 
-    if (!account_email || !account_password || !account_firstname || !account_lastname) {
-        req.flash('notice', 'Please fill in all fields.');
-        return res.status(400).render('account/register', {
-            title: "Register",
-            nav,
-            errors: req.flash('notice'),
-        });
-    }
+     // Hash the password before storing
+  let hashedPassword
+  try {
+    // regular password and cost (salt is generated automatically)
+    hashedPassword = await bcrypt.hashSync(account_password, 10)
+  } catch (error) {
+    req.flash("notice", 'Sorry, there was an error processing the registration.')
+    res.status(500).render("account/register", {
+      title: "Registration",
+      nav,
+      errors: null,
+    })
+  }
+
+
+    //if (!account_email || !account_password || !account_firstname || !account_lastname) {
+       // req.flash('notice', 'Please fill in all fields.');
+      //  return res.status(400).render('account/register', {
+        //    title: "Register",
+        //    nav,
+        //    errors: req.flash('notice'),
+      //  });
+  //  }
   
     const regResult = await accountModel.registerAccount(
       account_firstname,
       account_lastname,
       account_email,
-      account_password
+      hashedPassword
     )
   
     if (regResult) {
