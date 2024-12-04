@@ -1,9 +1,11 @@
+<main class="classification-container">
 <h1>Add New Classification</h1>
 
-<form action="/inv/add-classification" method="POST">
+<form action="/inv/add-classification" method="POST" class="classification-form">
+    <div class="form-group">
   <label for="classification_name">Classification Name:</label>
-  <input type="text" name="classification_name" id="classification_name" required pattern="^[a-zA-Z0-9]+$" />
-
+  <input type="text" name="classification_name" id="classification_name" required pattern="^[a-zA-Z0-9]+$" placeholder="Enter Classification"/>
+</div>
   <button type="submit">Add Classification</button>
 </form>
 
@@ -12,3 +14,4 @@
     <%= messages %>
   </div>
 <% } %>
+</main>

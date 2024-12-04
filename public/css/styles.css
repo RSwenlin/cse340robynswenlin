@@ -310,19 +310,87 @@ nav a {
 .upgrade-item a:hover {
   color: #ff6600;
 }
+/* General Styling */
+
+
+main.classification-container {
+  width: 100%;
+  max-width: 400px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Form Styling */
+.classification-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  background-color: #ff6600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+button[type="submit"]:hover {
+  background-color: #e65c00;
+}
+
+/* Flash Message Styling */
+.flash-message {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #fdd;
+  color: #d00;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #d00;
+}
 
 
 /* Footer */
 footer {
-  background-color: #898484;
+  background-color: #ff6600;
   color: white;
-  padding: 10px 0;
-  text-align: center;
+  padding: 10px;
+  text-align: left;
 }
 
 footer .copyright {
-  font-size: 12px;
-  color: #ccc;
+  font-size: 16px;
+  color: white;
 }
 /* Example styles for the login container */
 .loginContainer {
