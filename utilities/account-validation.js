@@ -100,6 +100,21 @@ validate.checkLoginData = async (req, res, next) => {
   }
   next()
 }
+exports.checkUpdateData = function (req, res, next) {
+  const { inv_make, inv_model, inv_description, inv_price, inv_year, inv_miles, inv_color, classification_id, inv_id } = req.body;
+  
+  // Add your validation checks here...
+  
+  if (validationErrors) {
+    // Redirect back to the edit view with error messages
+    return res.render("inventory/edit-inventory", { 
+      title: "Edit Inventory", 
+      errors: validationErrors, 
+      ...req.body 
+    });
+  }
+  next();
+};
 
   
   module.exports = validate

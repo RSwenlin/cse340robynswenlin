@@ -29,6 +29,11 @@ router.post("/add-inventory", invController.processAddInventory);
 
 router.get("/add-inventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 
+// Route to display edit inventory view
+router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
+
+router.post("/update/", invController.updateInventory);
+
 
 module.exports = router;
 

@@ -378,6 +378,41 @@ button[type="submit"]:hover {
   font-size: 14px;
   border: 1px solid #d00;
 }
+.inventory-form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.inventory-form input,
+.inventory-form textarea,
+.inventory-form select,
+.inventory-form button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.inventory-form button {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.inventory-form button:hover {
+  background-color: #218838;
+}
+
+.flash-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
 
 
 /* Footer */
