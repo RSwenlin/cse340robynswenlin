@@ -3,7 +3,7 @@ const express = require("express")
 const router = new express.Router() 
 const accountController = require('../controllers/accountController')
 const utilities = require('../utilities/')
-const regValidate = require('../utilities/account-validation')
+const validate = require('../utilities/account-validation')
 
 // Apply checkLogin middleware to make sure the user is logged in for certain routes
 router.get('/login', utilities.handleErrors(accountController.buildLogin))
@@ -13,8 +13,8 @@ router.get('/login', utilities.handleErrors(accountController.buildLogin))
 *   **************** */
 router.post(
     '/login',
-    regValidate.loginRules(),
-    regValidate.checkLoginData,
+    validate.loginRules(),
+    validate.checkLoginData,
     utilities.handleErrors(accountController.accountLogin)
 )
 
@@ -33,8 +33,8 @@ router.get('/register', utilities.handleErrors(accountController.buildRegister))
 *   Process Registration
 *   ********************** */
 router.post('/register',
-    regValidate.registrationRules(),
-    regValidate.checkRegData,
+    validate.registrationRules(),
+    validate.checkRegData,
     utilities.handleErrors(accountController.registerAccount))
 
 /* ***********************
@@ -53,15 +53,15 @@ router.get('/update', utilities.checkLogin, accountController.updateAccountView)
 
 // Route to update account data
 router.post('/update', 
-  regValidate.updateAccountRules(), 
-  regValidate.handleValidationErrors,
+  validate.updateAccountRules(), 
+  validate.handleValidationErrors,
   accountController.updateAccount
 );
 
 // Route to change password
 router.post('/change-password', 
-  regValidate.changePasswordRules(), 
-  regValidate.handleValidationErrors,
+  validate.changePasswordRules(), 
+  validate.handleValidationErrors,
   accountController.changePassword
 );
 
