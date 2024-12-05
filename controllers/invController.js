@@ -249,9 +249,6 @@ invCont.getInventoryJSON = async (req, res, next) => {
       });
     }
   };
-  
-
-  
 
 module.exports = invCont;
 

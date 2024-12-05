@@ -8,7 +8,6 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
-
 /* ************
 *   Login view
 ************** */
@@ -19,6 +18,7 @@ async function buildLogin(req, res, next) {
         nav,
     }) 
 }
+
 /* ***************************
 *   Deliver registration view
 *   ************************ */
@@ -46,7 +46,6 @@ async function registerAccount(req, res) {
      // Hash the password before storing
   let hashedPassword
   try {
-    // regular password and cost (salt is generated automatically)
     hashedPassword = await bcrypt.hashSync(account_password, 10)
   } catch (error) {
     req.flash("notice", 'Sorry, there was an error processing the registration.')
@@ -57,16 +56,6 @@ async function registerAccount(req, res) {
     })
   }
 
-
-    //if (!account_email || !account_password || !account_firstname || !account_lastname) {
-       // req.flash('notice', 'Please fill in all fields.');
-      //  return res.status(400).render('account/register', {
-        //    title: "Register",
-        //    nav,
-        //    errors: req.flash('notice'),
-      //  });
-  //  }
-  
     const regResult = await accountModel.registerAccount(
       account_firstname,
       account_lastname,
@@ -90,9 +79,9 @@ async function registerAccount(req, res) {
         nav,
       })
     }
-  }
+}
 
-  /* ****************************************
+/* ****************************************
  *  Process login request
  * ************************************ */
 async function accountLogin(req, res) {
@@ -109,9 +98,7 @@ async function accountLogin(req, res) {
         });
     }
 
-
     const accountData = await accountModel.getAccountByEmail(account_email)
-    console.log(accountData)
     if (!accountData) {
       req.flash("notice", "Please check your credentials and try again.")
       res.status(400).render("account/login", {
@@ -122,18 +109,25 @@ async function accountLogin(req, res) {
       })
       return
     }
+
     try {
       if (await bcrypt.compare(account_password, accountData.account_password)) {
         delete accountData.account_password
+
+        // Create a JWT token and set it in the cookie
         const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
-        if(process.env.NODE_ENV === 'development') {
-          res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-        } else {
-          res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
-        }
+        res.cookie("jwt", accessToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production', // Set to true in production
+          maxAge: 3600 * 1000, // Expires in 1 hour
+        });
+
+        // Store session data as logged in
+        req.session.loggedin = true;
+        req.session.accountData = accountData;
+
         return res.redirect("/account/")
-      }
-      else {
+      } else {
         req.flash("message notice", "Please check your credentials and try again.")
         res.status(400).render("account/login", {
           title: "Login",
@@ -143,55 +137,146 @@ async function accountLogin(req, res) {
         })
       }
     } catch (error) {
-      throw new Error('Access Forbidden')
+      req.flash("notice", "An error occurred during login.");
+      res.status(500).render("account/login", {
+        title: "Login",
+        nav,
+        errors: null,
+        account_email,
+      })
     }
-  }
-  
-  /* ****************************************
+}
+/* ****************************************
  * Account Management View
  * ************************************ */
 async function accountManagement(req, res) {
     let nav = await utilities.getNav();
-    let userData = null;
+    let userData = req.session.accountData || null;
 
-    // Check if the user is logged in by verifying the JWT token
-    if (req.cookies.jwt) {
-        try {
-            // Decode the JWT token to get user data (account info)
-            const decoded = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
-            userData = decoded;  // If JWT is valid, set the user data
-        } catch (error) {
-            // If there's an error verifying the token, treat it as unauthorized
-            req.flash('notice', 'Your session has expired. Please log in again.');
-            return res.redirect('/login');
-        }
-    } else {
-        // If there's no JWT cookie, the user is not logged in
+    // If the user is not logged in, redirect to login page
+    if (!req.session.loggedin) {
         req.flash('notice', 'You need to log in first.');
-        return res.redirect('/login');
+        return res.redirect('/account/login');
     }
 
-    // Retrieve flash messages
     const flashMessage = req.flash('message')[0];
     const errors = req.flash('errors');
+
+    // Determine the account type and pass it to the view
+    let accountType = userData.account_type || 'Client'; // Default to 'Client' if not set
 
     // Render the account management page, passing user data and flash messages
     res.render('account/management', {
         title: 'Account Management',
         nav,
-        userData,  // Pass user data to the view
+        loggedin: req.session.loggedin,  // Pass logged-in status
+        accountData: userData,  // Pass session data directly to the view
         flash: { message: flashMessage },
-        errors: errors
+        errors: errors,
+        accountType: accountType  // Pass account type to the view
     });
 }
 
-  
 
+/* ****************************************
+ * Process Logout
+ * ************************************ */
+async function accountLogout(req, res) {
+    req.session.destroy((err) => {
+      if (err) {
+        return res.redirect('/account');
+      }
+      res.clearCookie('sessionId'); 
+      res.redirect('/account/login'); 
+    });
+  }
+
+ /* ****************************************
+ * update account view
+ * ************************************ */
+
+async function updateAccountView(req, res) {
+    const userData = req.session.accountData;
+    
+    // Ensure user is logged in
+    if (!userData) {
+      req.flash('message', 'You need to log in first.');
+      return res.redirect('/account/login');
+    }
+  
+    // Render the account update form
+    res.render('account/update', {
+      title: 'Update Account',
+      accountData: userData
+    });
+  }
+  async function updateAccount(req, res) {
+    const { firstName, lastName, email, account_id } = req.body;
+    const userData = req.session.accountData;
+  
+    try {
+      // Check if email already exists
+      const existingEmail = await accountModel.getAccountByEmail(email);
+      if (existingEmail && existingEmail.id !== account_id) {
+        req.flash('errors', 'Email already in use');
+        return res.redirect('back');
+      }
+  
+      // Update the account info
+      await accountModel.updateAccountInfo(account_id, firstName, lastName, email);
+      req.session.accountData.firstName = firstName;
+      req.session.accountData.lastName = lastName;
+      req.session.accountData.email = email;
+  
+      req.flash('message', 'Account updated successfully');
+      res.redirect('/account/manage');
+    } catch (err) {
+      console.error(err);
+      req.flash('errors', 'Failed to update account');
+      res.redirect('back');
+    }
+  }
+  async function changePassword(req, res) {
+    const { password, account_id } = req.body;
+    
+    try {
+      // Hash the new password
+      const hashedPassword = await utilities.hashPassword(password);
+      
+      // Update the password in the database
+      await accountModel.updatePassword(account_id, hashedPassword);
+      
+      req.flash('message', 'Password updated successfully');
+      res.redirect('/account/manage');
+    } catch (err) {
+      console.error(err);
+      req.flash('errors', 'Failed to change password');
+      res.redirect('back');
+    }
+  }
+  // controllers/accountController.js
+
+function logout(req, res) {
+    req.session.destroy(err => {
+      if (err) {
+        return res.status(500).send('Error logging out');
+      }
+      res.clearCookie('sessionId');
+      res.redirect('/');
+    });
+  }
+  
 
 module.exports = {
     buildLogin,
     buildRegister,
     registerAccount,
     accountLogin,
-    accountManagement
- };
+    accountManagement,
+    accountLogout,
+    updateAccountView,
+    updateAccount,
+    changePassword,
+    logout
+};
+

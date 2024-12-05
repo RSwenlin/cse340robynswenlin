@@ -1,0 +1,47 @@
+<!-- views/account/update.ejs -->
+<h1>Update Account Information</h1>
+
+<%- messages() %>
+
+<form action="/account/update" method="POST">
+  <h2>Account Update</h2>
+
+  <!-- First Name -->
+  <div>
+    <label for="firstName">First Name</label>
+    <input type="text" name="firstName" id="firstName" value="<%= accountData.firstName %>" required />
+  </div>
+
+  <!-- Last Name -->
+  <div>
+    <label for="lastName">Last Name</label>
+    <input type="text" name="lastName" id="lastName" value="<%= accountData.lastName %>" required />
+  </div>
+
+  <!-- Email -->
+  <div>
+    <label for="email">Email Address</label>
+    <input type="email" name="email" id="email" value="<%= accountData.email %>" required />
+  </div>
+
+  <!-- Hidden account id -->
+  <input type="hidden" name="account_id" value="<%= accountData.id %>" />
+
+  <button type="submit">Update Account</button>
+</form>
+
+<form action="/account/change-password" method="POST">
+  <h2>Change Password</h2>
+
+  <!-- New Password -->
+  <div>
+    <label for="password">New Password</label>
+    <input type="password" name="password" id="password" required />
+    <small>Min 8 characters, at least 1 letter and 1 number</small>
+  </div>
+
+  <!-- Hidden account id for password change -->
+  <input type="hidden" name="account_id" value="<%= accountData.id %>" />
+
+  <button type="submit">Change Password</button>
+</form>

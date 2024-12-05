@@ -100,21 +100,92 @@ validate.checkLoginData = async (req, res, next) => {
   }
   next()
 }
-exports.checkUpdateData = function (req, res, next) {
-  const { inv_make, inv_model, inv_description, inv_price, inv_year, inv_miles, inv_color, classification_id, inv_id } = req.body;
-  
-  // Add your validation checks here...
-  
-  if (validationErrors) {
-    // Redirect back to the edit view with error messages
-    return res.render("inventory/edit-inventory", { 
-      title: "Edit Inventory", 
-      errors: validationErrors, 
-      ...req.body 
+
+ 
+
+
+/* ******************************
+ * Update Inventory Validation Rules
+ * ***************************** */
+validate.updateInventoryRules = () => {
+  return [
+    body("inv_make")
+      .trim()
+      .escape()
+      .notEmpty()
+      .withMessage("Please provide the vehicle make."),
+    body("inv_model")
+      .trim()
+      .escape()
+      .notEmpty()
+      .withMessage("Please provide the vehicle model."),
+    body("inv_price")
+      .isNumeric()
+      .withMessage("Please provide a valid price for the vehicle."),
+    body("inv_year")
+      .isNumeric()
+      .withMessage("Please provide the vehicle year."),
+    body("inv_miles")
+      .isNumeric()
+      .withMessage("Please provide the vehicle mileage."),
+    body("inv_description")
+      .trim()
+      .escape()
+      .notEmpty()
+      .withMessage("Please provide a description for the vehicle.")
+  ]
+}
+
+
+/* ******************************
+ * Check Inventory Update Data
+ * ***************************** */
+validate.checkUpdateData = async (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const nav = await utilities.getNav();
+    return res.render("inventory/edit-inventory", {
+      title: "Edit Inventory",
+      errors: errors.array(),
+      nav,
+      ...req.body, 
     });
   }
   next();
 };
+/* ******************************
+ * Check account validation
+ * ***************************** */
+
+const { check, validationResult } = require('express-validator');
+
+module.exports = {
+  updateAccountRules: () => {
+    return [
+      check('firstName').notEmpty().withMessage('First name is required.'),
+      check('lastName').notEmpty().withMessage('Last name is required.'),
+      check('email').isEmail().withMessage('Valid email is required.')
+    ];
+  },
+
+  changePasswordRules: () => {
+    return [
+      check('password').isLength({ min: 8 }).withMessage('Password must be at least 8 characters.'),
+      check('password').matches(/[A-Za-z]/).withMessage('Password must contain letters.'),
+      check('password').matches(/\d/).withMessage('Password must contain numbers.')
+    ];
+  },
+
+  handleValidationErrors: (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      req.flash('errors', errors.array());
+      return res.redirect('back');
+    }
+    next();
+  }
+};
+
 
   
   module.exports = validate

@@ -5,6 +5,7 @@ const invController = require("../controllers/invController")
 const utilities = require('../utilities')
 const inventoryModel = require('../models/inventory-model');
 
+
 // Route to build inventory by classification view (GET)
 router.get("/type/:classificationId", invController.buildByClassificationId);
 
@@ -25,17 +26,24 @@ router.post("/add-classification", invController.processAddClassification);
 router.get("/add-inventory", invController.addInventoryForm);
 
 // Route to process the add inventory form (POST)
-router.post("/add-inventory", invController.processAddInventory);
+router.post("/add-inventory", 
+  utilities.handleErrors(invController.processAddInventory)
+);
 
-router.get("/add-inventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+// Route to display the edit inventory form (GET)
+router.get("/edit/:inv_id", 
+  utilities.handleErrors(invController.editInventoryView)
+);
 
-// Route to display edit inventory view
-router.get("/edit/:inv_id", utilities.handleErrors(invController.editInventoryView));
-
+// Route to process inventory updates (POST)
 router.post("/update/", invController.updateInventory);
 
 
+// Route to display add inventory form based on classification
+router.get("/add-inventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+
 module.exports = router;
+
 
 
 

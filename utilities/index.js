@@ -122,6 +122,37 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
+// utilities/index.js
+
+// Middleware to check token validity and account type
+Util.checkAccountType = (req, res, next) => {
+  if (req.cookies.jwt) {
+      jwt.verify(
+          req.cookies.jwt,
+          process.env.ACCESS_TOKEN_SECRET,
+          function (err, accountData) {
+              if (err) {
+                  req.flash("notice", "Please log in.");
+                  res.clearCookie("jwt");
+                  return res.redirect("/account/login");
+              }
+              // Check if the account type is "Employee" or "Admin"
+              if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') {
+                  res.locals.accountData = accountData;
+                  res.locals.loggedin = 1;
+                  next();
+              } else {
+                  req.flash("notice", "You do not have permission to access this page.");
+                  return res.redirect("/account/login");
+              }
+          }
+      );
+  } else {
+      next();
+  }
+}
+
+
 Util.handleErrors = (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
 
 
