@@ -3,7 +3,23 @@
     <a href="/" title="Return to home page">CSE Motors</a>
   </span>
   <div id="tools">
-    <a title="Click to log in" href="/account/login">My Account</a>
+    <!--'Welcome Basic' link (for account management) -->
+    <% if (locals.user) { %> 
+      <a href="/account" title="Go to account management">Welcome</a>
+      <a href="/account/logout" title="Click to log out">Logout</a>
+      <% } %>
+   
+
+    <!-- 'My Account' link visible only when logged out -->
+    <% if (!locals.user) { %>
+      <a title="Click to log in" href="/account/login">My Account</a>
+    <% } %>
+
+    <!-- 'Logout' link visible only when logged in -->
+    <% if (locals.user) { %>
+      <a href="/account/logout" title="Click to log out">Logout</a>
+    <% } %>
   </div>
 </header>
+
 

@@ -200,6 +200,10 @@ nav a {
 .vehicle-info .btn-primary:hover {
   background-color: #e65c00;
 }
+.vehicle-detail {
+  background-color: white;
+
+}
 
 #inv-display {
   display: flex;
