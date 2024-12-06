@@ -20,7 +20,7 @@ router.post(
 
 router.get('/logout', accountController.accountLogout)  // Logout route
 // routes/accountRoute.js
-router.get('/logout', accountController.logout);
+//router.get('/logout', accountController.logout);
 
 
  /* ***********************

@@ -42,7 +42,7 @@ function buildInventoryList(data) {
     // Display the contents in the Inventory Management view 
     inventoryDisplay.innerHTML = dataTable; 
    }
-   const form = document.querySelector("#updateForm");
+   const form = document.querySelector("#inventoryDisplay");
    form.addEventListener("change", function () {
      const updateBtn = document.querySelector("button[type='submit']");
      updateBtn.removeAttribute("disabled");

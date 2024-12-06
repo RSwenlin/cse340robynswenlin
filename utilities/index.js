@@ -122,8 +122,6 @@ Util.checkJWTToken = (req, res, next) => {
   }
  }
 
-// utilities/index.js
-
 // Middleware to check token validity and account type
 Util.checkAccountType = (req, res, next) => {
   if (req.cookies.jwt) {

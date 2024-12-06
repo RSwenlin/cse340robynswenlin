@@ -184,8 +184,10 @@ async function accountManagement(req, res) {
 async function accountLogout(req, res) {
     req.session.destroy((err) => {
       if (err) {
+        console.log('Error destroying session', err)
         return res.redirect('/account');
       }
+      console.log('Session destroyed successfully')
       res.clearCookie('sessionId'); 
       res.redirect('/account/login'); 
     });
@@ -256,15 +258,7 @@ async function updateAccountView(req, res) {
   }
   // controllers/accountController.js
 
-function logout(req, res) {
-    req.session.destroy(err => {
-      if (err) {
-        return res.status(500).send('Error logging out');
-      }
-      res.clearCookie('sessionId');
-      res.redirect('/');
-    });
-  }
+
   
 
 module.exports = {
@@ -276,7 +270,6 @@ module.exports = {
     accountLogout,
     updateAccountView,
     updateAccount,
-    changePassword,
-    logout
+    changePassword
 };
 
