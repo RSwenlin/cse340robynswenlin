@@ -119,7 +119,7 @@ app.listen(port, () => {
   console.log(`app listening on ${host}:${port}`)
 })
 app.use((req, res, next) => {
-  res.locals.user = req.user || null; 
+  res.locals.accountData = req.user || null; 
   next();
 });
 

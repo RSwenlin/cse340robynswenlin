@@ -18,31 +18,31 @@
     <label for="vehicle_make">Make:</label>
     <input 
       type="text" 
-      name="vehicle_make" 
-      id="vehicle_make" 
-      value="<%= vehicle_make || '' %>" 
+      name="inv_make" 
+      id="inv_make" 
+      value="<%= inv_make || '' %>" 
       required 
       placeholder="e.g., Toyota"
     >
 
-    <!-- Vehicle Model -->
-    <label for="vehicle_model">Model:</label>
+    <!-- Inv Model -->
+    <label for="inv_model">Model:</label>
     <input 
       type="text" 
-      name="vehicle_model" 
-      id="vehicle_model" 
+      name="inv_model" 
+      id="inv_model" 
       value="<%= vehicle_model || '' %>" 
       required 
       placeholder="e.g., Corolla"
     >
 
-    <!-- Vehicle Year -->
-    <label for="vehicle_year">Year:</label>
+    <!-- Inv Year -->
+    <label for="inv_year">Year:</label>
     <input 
       type="number" 
-      name="vehicle_year" 
-      id="vehicle_year" 
-      value="<%= vehicle_year || '' %>" 
+      name="inv_year" 
+      id="inv_year" 
+      value="<%= inv_year || '' %>" 
       required 
       min="1900" 
       max="2100"
@@ -53,14 +53,14 @@
     <label for="classification_id">Classification:</label>
     <%= classificationList %> <!-- Dynamically generated dropdown -->
 
-    <!-- Vehicle Price -->
+    <!-- Inv Price -->
     <label for="vehicle_price">Price:</label>
     <input 
       type="number" 
-      name="vehicle_price" 
-      id="vehicle_price" 
+      name="inv_price" 
+      id="inv_price" 
       step="0.01" 
-      value="<%= vehicle_price || '' %>" 
+      value="<%= inv_price || '' %>" 
       required 
       placeholder="e.g., 25000.99"
     >
