@@ -4,20 +4,13 @@
   </span>
   <div id="tools">
     <!--'Welcome Basic' link (for account management) -->
-    <% if (locals.accountData) { %> 
+    <% if (locals.accountData) { %> <!-- Check if accountData exists -->
       <a href="/account" title="Go to account management">Welcome</a>
-      <% } %>
-   
-
-    <!-- 'My Account' link visible only when logged out -->
-    <% if (!locals.accountData) { %>
-      <a title="Click to log in" href="/account/login">My Account</a>
-    <% } %>
-
-    <!-- 'Logout' link visible only when logged in -->
-    <% if (locals.accountData) { %>
       <a href="/account/logout" title="Click to log out">Logout</a>
-    <% } %>
+  <% } else { %> <!-- If no accountData, show My Account -->
+      <a href="/account/login" title="Click to log in">My Account</a>
+  <% } %>
+  
   </div>
 </header>
 

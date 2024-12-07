@@ -1,69 +1,60 @@
-// Needed Resources 
-const express = require("express")
-const router = new express.Router() 
-const accountController = require('../controllers/accountController')
-const utilities = require('../utilities/')
-const validate = require('../utilities/account-validation')
+const express = require("express");
+const router = new express.Router();
+const accountController = require('../controllers/accountController');
+const utilities = require('../utilities/');
+const validate = require('../utilities/account-validation');
 
 // Apply checkLogin middleware to make sure the user is logged in for certain routes
-router.get('/login', utilities.handleErrors(accountController.buildLogin))
+router.get('/login', utilities.handleErrors(accountController.buildLogin));
 
-/* *******************
-*   Login process
-*   **************** */
+// Login process
 router.post(
     '/login',
     validate.loginRules(),
     validate.checkLoginData,
     utilities.handleErrors(accountController.accountLogin)
-)
+);
 
-router.get('/logout', accountController.accountLogout)  // Logout route
-// routes/accountRoute.js
-//router.get('/logout', accountController.logout);
+// Logout route
+router.get('/logout', accountController.accountLogout);  // Logout route
 
+// Registration View
+router.get('/register', utilities.handleErrors(accountController.buildRegister));
 
- /* ***********************
-*   Registration View
-*   Unit 4, deliver registration view
-*   ********************** */
-router.get('/register', utilities.handleErrors(accountController.buildRegister))
-
-/* ***********************
-*   Process Registration
-*   ********************** */
+// Process Registration
 router.post('/register',
     validate.registrationRules(),
     validate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount))
+    utilities.handleErrors(accountController.registerAccount)
+);
 
-/* ***********************
-*   Account Management
-*   ********************** */
-router.get('/',
-    utilities.checkLogin,        
-    utilities.checkAccountType,  
-    utilities.handleErrors(accountController.accountManagement)) 
+// Account Management (Main route for logged-in users)
+router.get('/', utilities.checkLogin, utilities.checkAccountType, utilities.handleErrors(accountController.accountManagement));
 
-router.post('/',
-    utilities.handleErrors(accountController.accountManagement))
-
-// Route to get the update account view
+// Update Account View
 router.get('/update', utilities.checkLogin, accountController.updateAccountView);
 
-// Route to update account data
+// Update Account Data
 router.post('/update', 
-  validate.updateAccountRules(), 
-  validate.handleValidationErrors,
-  accountController.updateAccount
+    validate.updateAccountRules(), 
+    validate.handleValidationErrors,
+    accountController.updateAccount
 );
 
-// Route to change password
+// Change Password
 router.post('/change-password', 
-  validate.changePasswordRules(), 
-  validate.handleValidationErrors,
-  accountController.changePassword
+    validate.changePasswordRules(), 
+    validate.handleValidationErrors,
+    accountController.changePassword
 );
 
+// Handle Account Logout
+router.get('/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.clearCookie('jwt'); // If using JWT
+        res.redirect('/account/login'); // Redirect to login page after logout
+    });
+});
 
-module.exports = router
+module.exports = router;
+

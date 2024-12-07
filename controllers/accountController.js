@@ -151,7 +151,7 @@ async function accountLogin(req, res) {
  * ************************************ */
 async function accountManagement(req, res) {
     let nav = await utilities.getNav();
-    let userData = req.session.accountData || null;
+    let accountData = req.session.accountData || null;  // Use the accountData from the session
 
     // If the user is not logged in, redirect to login page
     if (!req.session.loggedin) {
@@ -162,18 +162,14 @@ async function accountManagement(req, res) {
     const flashMessage = req.flash('message')[0];
     const errors = req.flash('errors');
 
-    // Determine the account type and pass it to the view
-    let accountType = userData.account_type || 'Client'; // Default to 'Client' if not set
-
-    // Render the account management page, passing user data and flash messages
+    // Render the account management page
     res.render('account/management', {
         title: 'Account Management',
         nav,
-        loggedin: req.session.loggedin,  // Pass logged-in status
-        accountData: userData,  // Pass session data directly to the view
+        loggedin: req.session.loggedin,
+        accountData: accountData,  // Pass accountData into the view
         flash: { message: flashMessage },
         errors: errors,
-        accountType: accountType  // Pass account type to the view
     });
 }
 
@@ -188,7 +184,7 @@ async function accountLogout(req, res) {
         return res.redirect('/account');
       }
       console.log('Session destroyed successfully')
-      res.clearCookie('sessionId'); 
+      res.clearCookie('jwt'); 
       res.redirect('/account/login'); 
     });
   }
@@ -198,10 +194,10 @@ async function accountLogout(req, res) {
  * ************************************ */
 
 async function updateAccountView(req, res) {
-    const userData = req.session.accountData;
+    const accountData = req.session.accountData;
     
     // Ensure user is logged in
-    if (!userData) {
+    if (!accountData) {
       req.flash('message', 'You need to log in first.');
       return res.redirect('/account/login');
     }
@@ -209,12 +205,12 @@ async function updateAccountView(req, res) {
     // Render the account update form
     res.render('account/update', {
       title: 'Update Account',
-      accountData: userData
+      accountData: accountData
     });
   }
   async function updateAccount(req, res) {
     const { firstName, lastName, email, account_id } = req.body;
-    const userData = req.session.accountData;
+    const accountData = req.session.accountData;
   
     try {
       // Check if email already exists
@@ -231,7 +227,7 @@ async function updateAccountView(req, res) {
       req.session.accountData.email = email;
   
       req.flash('message', 'Account updated successfully');
-      res.redirect('/account/manage');
+      res.redirect('/account');
     } catch (err) {
       console.error(err);
       req.flash('errors', 'Failed to update account');
@@ -249,7 +245,7 @@ async function updateAccountView(req, res) {
       await accountModel.updatePassword(account_id, hashedPassword);
       
       req.flash('message', 'Password updated successfully');
-      res.redirect('/account/manage');
+      res.redirect('/account');
     } catch (err) {
       console.error(err);
       req.flash('errors', 'Failed to change password');
