@@ -103,36 +103,36 @@ invCont.addInventoryForm = async function (req, res) {
  * ************************** */
 invCont.processAddInventory = async function (req, res) {
   const { 
-    vehicle_make,
-    vehicle_model,
-    vehicle_year,
+    inv_make,
+    inv_model,
+    inv_year,
     classification_id,
-    vehicle_price,
-    vehicle_miles,
-    vehicle_description,
-    vehicle_color,
-    vehicle_image
+    inv_price,
+    inv_miles,
+    inv_description,
+    inv_color,
+    inv_image
  } = req.body;
 
   // Validate form data (basic validation for all fields)
-  if (!vehicle_make || !vehicle_model || !vehicle_year || !classification_id || 
-    !vehicle_price || !vehicle_miles || !vehicle_description ||
-    !vehicle_color || !vehicle_image) {
+  if (!inv_make || !inv_model || !inv_year || !classification_id || 
+    !inv_price || !inv_miles || !inv_description ||
+    !inv_color || !inv_image) {
     req.flash("notice", "All fields are required.");
     return res.redirect("/inv/add-inventory");
   }
 
   // Call model function to insert new inventory
   const result = await invModel.addInventory(
-    vehicle_make,
-    vehicle_model,
-    vehicle_year,
+    inv_make,
+    inv_model,
+    inv_year,
     classification_id,
-    vehicle_price,
-    vehicle_miles,
-    vehicle_description,
-    vehicle_color,
-    vehicle_image
+    inv_price,
+    inv_miles,
+    inv_description,
+    inv_color,
+    inv_image
   );
 
   if (result) {
