@@ -15,34 +15,34 @@
 
   <form action="/inv/edit-inventory" method="POST" class="inventory-edit">
     <!-- Vehicle Make -->
-    <label for="vehicle_make">Make:</label>
+    <label for="inv_make">Make:</label>
     <input 
       type="text" 
-      name="vehicle_make" 
-      id="vehicle_make" 
-      value="<%= vehicle_make || '' %>" 
+      name="inv_make" 
+      id="inv_make" 
+      value="<%= inv_make || '' %>" 
       required 
       placeholder="e.g., Toyota"
     >
 
     <!-- Vehicle Model -->
-    <label for="vehicle_model">Model:</label>
+    <label for="inv_model">Model:</label>
     <input 
       type="text" 
-      name="vehicle_model" 
-      id="vehicle_model" 
-      value="<%= vehicle_model || '' %>" 
+      name="inv_model" 
+      id="inv_model" 
+      value="<%= inv_model || '' %>" 
       required 
       placeholder="e.g., Corolla"
     >
 
     <!-- Vehicle Year -->
-    <label for="vehicle_year">Year:</label>
+    <label for="inv_year">Year:</label>
     <input 
       type="number" 
-      name="vehicle_year" 
-      id="vehicle_year" 
-      value="<%= vehicle_year || '' %>" 
+      name="inv_year" 
+      id="inv_year" 
+      value="<%= inv_year || '' %>" 
       required 
       min="1900" 
       max="2100"
@@ -54,56 +54,56 @@
     <%= classificationList %> <!-- Dynamically generated dropdown -->
 
     <!-- Vehicle Price -->
-    <label for="vehicle_price">Price:</label>
+    <label for="inv_price">Price:</label>
     <input 
       type="number" 
-      name="vehicle_price" 
-      id="vehicle_price" 
+      name="inv_price" 
+      id="inv_price" 
       step="0.01" 
-      value="<%= vehicle_price || '' %>" 
+      value="<%= inv_price || '' %>" 
       required 
       placeholder="e.g., 25000.99"
     >
 
     <!-- Vehicle Mileage -->
-    <label for="vehicle_miles">Mileage:</label>
+    <label for="inv_miles">Mileage:</label>
     <input 
       type="number" 
-      name="vehicle_miles" 
-      id="vehicle_miles" 
-      value="<%= vehicle_miles || '' %>" 
+      name="inv_miles" 
+      id="inv_miles" 
+      value="<%= inv_miles || '' %>" 
       required 
       min="0"
       placeholder="e.g., 10000"
     >
 
     <!-- Vehicle Description -->
-    <label for="vehicle_description">Description:</label>
+    <label for="inv_description">Description:</label>
     <textarea 
-      name="vehicle_description" 
-      id="vehicle_description" 
+      name="inv_description" 
+      id="inv_description" 
       required 
       placeholder="Describe the vehicle"
-    ><%= vehicle_description || '' %></textarea>
+    ><%= inv_description || '' %></textarea>
 
     <!-- Vehicle Color -->
-    <label for="vehicle_color">Color:</label>
+    <label for="inv_color">Color:</label>
     <input 
       type="text" 
-      name="vehicle_color" 
-      id="vehicle_color" 
-      value="<%= vehicle_color || '' %>" 
+      name="inv_color" 
+      id="inv_color" 
+      value="<%= inv_color || '' %>" 
       required 
       placeholder="e.g., Red"
     >
 
     <!-- Vehicle Image URL -->
-    <label for="vehicle_image">Image URL:</label>
+    <label for="inv_image">Image URL:</label>
     <input 
       type="url" 
-      name="vehicle_image" 
-      id="vehicle_image" 
-      value="<%= vehicle_image || '' %>" 
+      name="inv_image" 
+      id="inv_image" 
+      value="<%= inv_image || '' %>" 
       required 
       placeholder="e.g., https://example.com/car.jpg"
     >
