@@ -697,7 +697,7 @@ small {
 .inventory-table tr:hover {
   background-color: #f2f2f2;
 }
-.account-management-view {
+.account-management-view h2 {
   background-color: white;
 }
 .account-update-view {

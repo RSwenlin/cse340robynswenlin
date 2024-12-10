@@ -166,6 +166,7 @@ async function accountManagement(req, res) {
     res.render('account/management', {
         title: 'Account Management',
         nav,
+        errors: null,
         loggedin: req.session.loggedin,
         accountData: accountData,  // Pass accountData into the view
         flash: { message: flashMessage },
@@ -206,6 +207,7 @@ async function updateAccountView(req, res) {
     // Render the account update form
     res.render('account/update', {
         nav,
+        errors: null,
       title: 'Update Account',
       accountData: accountData
     });

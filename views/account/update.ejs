@@ -4,11 +4,11 @@
 
 <%- messages() %>
 <% if (errors) { %>
-    <ul class="notice">
+  <ul>
    <% errors.array().forEach(error => { %>
      <li><%= error.msg %></li>
   <%  }) %>
-   </ul>
+  </ul>
   <% } %>
 
 <form action="/account/update" method="POST">
