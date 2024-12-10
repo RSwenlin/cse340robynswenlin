@@ -29,22 +29,22 @@ router.post('/register',
 );
 
 // Account Management (Main route for logged-in users)
-router.get('/', utilities.checkLogin, utilities.checkAccountType, utilities.handleErrors(accountController.accountManagement));
+router.get('/', utilities.checkLogin, utilities.handleErrors(accountController.accountManagement));
 
 // Update Account View
-router.get('/update', utilities.checkLogin, accountController.updateAccountView);
+router.get('/update/:account_id', utilities.checkLogin, accountController.updateAccountView);
 
 // Update Account Data
 router.post('/update', 
     validate.updateAccountRules(), 
-    validate.handleValidationErrors,
+    validate.checkAccountUpdate,
     accountController.updateAccount
 );
 
 // Change Password
 router.post('/change-password', 
     validate.changePasswordRules(), 
-    validate.handleValidationErrors,
+    //validate.handleValidationErrors,
     accountController.changePassword
 );
 

@@ -1,5 +1,5 @@
 const { body, check, validationResult } = require("express-validator");
-const utilities = require("..");  
+const utilities = require("./index");
 const validate = {};
 
 /* **********************************
@@ -14,7 +14,7 @@ validate.registrationRules = () => {
       .notEmpty()
       .isLength({ min: 1 })
       .withMessage("Please provide a first name."),
-    
+
     // lastname is required and must be string
     body("account_lastname")
       .trim()
@@ -56,7 +56,7 @@ validate.loginRules = () => {
       .trim()
       .isEmail()
       .withMessage("Please enter a valid email address."),
-    
+
     body("account_password")
       .trim()
       .notEmpty()
@@ -70,7 +70,7 @@ validate.loginRules = () => {
 validate.checkRegData = async (req, res, next) => {
   const { account_firstname, account_lastname, account_email } = req.body;
   const errors = validationResult(req);
-  
+
   if (!errors.isEmpty()) {
     const nav = await utilities.getNav();
     return res.render("account/register", {
@@ -82,7 +82,7 @@ validate.checkRegData = async (req, res, next) => {
       account_email,
     });
   }
-  
+
   next();
 };
 
@@ -92,7 +92,7 @@ validate.checkRegData = async (req, res, next) => {
 validate.checkLoginData = async (req, res, next) => {
   const { account_email } = req.body;
   const errors = validationResult(req);
-  
+
   if (!errors.isEmpty()) {
     const nav = await utilities.getNav();
     return res.render("account/login", {
@@ -116,25 +116,25 @@ validate.updateInventoryRules = () => {
       .escape()
       .notEmpty()
       .withMessage("Please provide the vehicle make."),
-    
+
     body("inv_model")
       .trim()
       .escape()
       .notEmpty()
       .withMessage("Please provide the vehicle model."),
-    
+
     body("inv_price")
       .isNumeric()
       .withMessage("Please provide a valid price for the vehicle."),
-    
+
     body("inv_year")
       .isNumeric()
       .withMessage("Please provide the vehicle year."),
-    
+
     body("inv_miles")
       .isNumeric()
       .withMessage("Please provide the vehicle mileage."),
-    
+
     body("inv_description")
       .trim()
       .escape()
@@ -148,7 +148,7 @@ validate.updateInventoryRules = () => {
  ***************************** */
 validate.checkUpdateData = async (req, res, next) => {
   const errors = validationResult(req);
-  
+
   if (!errors.isEmpty()) {
     const nav = await utilities.getNav();
     return res.render("inventory/edit-inventory", {
@@ -167,9 +167,28 @@ validate.checkUpdateData = async (req, res, next) => {
  ***************************** */
 validate.updateAccountRules = () => {
   return [
-    check("firstName").notEmpty().withMessage("First name is required."),
-    check("lastName").notEmpty().withMessage("Last name is required."),
-    check("email").isEmail().withMessage("Valid email is required."),
+    body("account_firstname")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 1 })
+      .withMessage("Please provide a first name."),
+    // lastname is required and must be string
+    body("account_lastname")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isLength({ min: 2 })
+      .withMessage("Please provide a last name."),
+
+    // valid email is required and cannot already exist in the DB
+    body("account_email")
+      .trim()
+      .escape()
+      .notEmpty()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("A valid email is required."),
   ];
 };
 
@@ -191,16 +210,24 @@ validate.changePasswordRules = () => {
 };
 
 /* ******************************
- * Handle Validation Errors
+ * check account update
  ***************************** */
-validate.handleValidationErrors = (req, res, next) => {
+validate.checkAccountUpdate = async (req, res, next) => {
+  const { account_firstname, account_lastname, account_email } = req.body;
   const errors = validationResult(req);
-  
+
   if (!errors.isEmpty()) {
-    req.flash("errors", errors.array());
-    return res.redirect("back");
+    const nav = await utilities.getNav();
+    return res.render("account/update", {
+      errors: errors,
+      title: "Account Update",
+      nav,
+      account_firstname,
+      account_lastname,
+      account_email,
+    });
   }
-  
+
   next();
 };
 

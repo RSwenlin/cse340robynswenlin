@@ -6,12 +6,13 @@
 
 <%- messages() %>
 
+
 <% if (loggedin) { %>
 
     <!-- Conditional greeting based on account type -->
-    <% if (accountType === 'Client') { %>
+    <% if (accountData.account_type === 'Client') { %>
         <h2>Welcome <%= accountData.account_firstname %></h2>
-    <% } else if (accountType === 'Employee' || accountType === 'Admin') { %>
+    <% } else if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') { %>
         <h2>Welcome <%= accountData.account_firstname %></h2>
         <h3>Inventory Management</h3>
         <p><a href="/inv/management">Access Inventory Management</a></p>

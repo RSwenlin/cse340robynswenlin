@@ -1,7 +1,15 @@
 <!-- views/account/update.ejs -->
+
 <h1>Update Account Information</h1>
 
 <%- messages() %>
+<% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
 
 <form action="/account/update" method="POST">
   <h2>Account Update</h2>
@@ -9,23 +17,23 @@
   <!-- First Name -->
   <div>
     <label for="firstName">First Name</label>
-    <input type="text" name="firstName" id="firstName" value="<%= accountData.firstName %>" required />
+    <input type="text" name="account_firstname" id="firstName" value="<%= accountData.account_firstname %>" required />
   </div>
 
   <!-- Last Name -->
   <div>
     <label for="lastName">Last Name</label>
-    <input type="text" name="lastName" id="lastName" value="<%= accountData.lastName %>" required />
+    <input type="text" name="account_lastName" id="lastName" value="<%= accountData.account_lastname %>" required />
   </div>
 
   <!-- Email -->
   <div>
     <label for="email">Email Address</label>
-    <input type="email" name="email" id="email" value="<%= accountData.email %>" required />
+    <input type="email" name="account_lastname" id="email" value="<%= accountData.account_email %>" required />
   </div>
 
   <!-- Hidden account id -->
-  <input type="hidden" name="account_id" value="<%= accountData.id %>" />
+  <input type="hidden" name="account_id" value="<%= accountData.account_id %>" />
 
   <button type="submit">Update Account</button>
 </form>
@@ -41,7 +49,7 @@
   </div>
 
   <!-- Hidden account id for password change -->
-  <input type="hidden" name="account_id" value="<%= accountData.id %>" />
+  <input type="hidden" name="account_id" value="<%= accountData.account_id %>" />
 
   <button type="submit">Change Password</button>
 </form>

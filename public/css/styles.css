@@ -697,7 +697,18 @@ small {
 .inventory-table tr:hover {
   background-color: #f2f2f2;
 }
-
+.account-management-view {
+  background-color: white;
+}
+.account-update-view {
+  background-color: white;
+}
+.client-greeting {
+  background-color: white;
+}
+.employee-greeting {
+  background-color: white;
+}
 
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {

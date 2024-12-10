@@ -194,7 +194,8 @@ async function accountLogout(req, res) {
  * ************************************ */
 
 async function updateAccountView(req, res) {
-    const accountData = req.session.accountData;
+    const accountData = res.locals.accountData
+    let nav = await utilities.getNav()
     
     // Ensure user is logged in
     if (!accountData) {
@@ -204,13 +205,14 @@ async function updateAccountView(req, res) {
   
     // Render the account update form
     res.render('account/update', {
+        nav,
       title: 'Update Account',
       accountData: accountData
     });
   }
   async function updateAccount(req, res) {
     const { firstName, lastName, email, account_id } = req.body;
-    const accountData = req.session.accountData;
+    const accountData = res.locals.accountData;
   
     try {
       // Check if email already exists
