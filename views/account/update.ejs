@@ -1,5 +1,5 @@
 <!-- views/account/update.ejs -->
-
+<div id="update-account">
 <h1>Update Account Information</h1>
 
 <%- messages() %>
@@ -11,7 +11,7 @@
   </ul>
   <% } %>
 
-<form action="/account/update" method="POST">
+<form id='update-account' action="/account/update" method="POST">
   <h2>Account Update</h2>
 
   <!-- First Name -->
@@ -53,3 +53,4 @@
 
   <button type="submit">Change Password</button>
 </form>
+</div>

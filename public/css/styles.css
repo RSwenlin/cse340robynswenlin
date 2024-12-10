@@ -336,6 +336,7 @@ main.classification-container {
 
 .form-group {
   margin-bottom: 15px;
+  background-color: white;
 }
 
 .form-group label {
@@ -351,7 +352,6 @@ main.classification-container {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f9f9f9;
 }
 
 button[type="submit"] {
@@ -448,12 +448,14 @@ h1 {
 
 .form-group {
   margin-bottom: 15px;
+  background-color: white;
 }
 
 .form-group label {
   display: block;
   font-size: 14px;
   color: #333;
+  background-color: white;
 }
 
 .form-group input {
@@ -462,6 +464,7 @@ h1 {
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background-color: white;
 }
 
 button[type="submit"] {
@@ -697,17 +700,17 @@ small {
 .inventory-table tr:hover {
   background-color: #f2f2f2;
 }
-.account-management-view h2 {
+
+#update-account h2 {
   background-color: white;
 }
-.account-update-view {
+#update-account form {
   background-color: white;
+  padding: 10px;
 }
-.client-greeting {
+#welcome-h2 {
   background-color: white;
-}
-.employee-greeting {
-  background-color: white;
+  padding: 10px;
 }
 
 /* Media Queries for responsiveness */
