@@ -249,6 +249,10 @@ invCont.getInventoryJSON = async (req, res, next) => {
       });
     }
   };
+/* *******************************
+* Fetch reviews along with inv details ()
+* ******************************* */
+  
 
 module.exports = invCont;
 
