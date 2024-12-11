@@ -19,7 +19,7 @@ const pool = require('./database/')
 const accountRoute = require('./routes/accountRoute')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
-
+const reviewRoutes = require("./routes/reviewRoute");
 
 
 
@@ -122,4 +122,6 @@ app.use((req, res, next) => {
   res.locals.accountData = req.user || null; 
   next();
 });
+// Use the review routes
+app.use("/reviews", reviewRoutes);
 

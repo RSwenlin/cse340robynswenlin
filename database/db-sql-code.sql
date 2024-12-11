@@ -257,3 +257,7 @@ ALTER TABLE IF EXISTS public.reviews
   ON UPDATE CASCADE
   ON DELETE NO ACTION;
 
+INSERT INTO review (review_text, inv_id, account_id)
+VALUES ('Great car, if you are a muggle!', 1, 1),
+       ('Decent mileage.', 1, 2),
+       ('Very reliable, but the color is ghastly', 2, 1);

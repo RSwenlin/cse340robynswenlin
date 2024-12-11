@@ -716,6 +716,61 @@ small {
   background-color: white;
   padding: 10px;
 }
+/* General Section Styling */
+#reviews-section {
+  margin-top: 20px;
+  padding: 15px;
+  border-top: 2px solid #ccc;
+  background-color: #f9f9f9;
+}
+
+/* Reviews Title Styling */
+#reviews-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #333;
+  text-align: left;
+}
+
+/* Reviews List Styling */
+#reviews-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.review-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+  font-size: 1em;
+}
+
+/* Review Author and Date Styling */
+.review-author {
+  font-weight: bold;
+  color: #007bff; /* Matches primary project theme color */
+}
+
+.review-date {
+  font-size: 0.9em;
+  color: #666;
+  margin-left: 5px;
+}
+
+/* Review Text Styling */
+.review-text {
+  margin: 10px 0;
+  font-size: 1em;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* No Reviews Message Styling */
+#no-reviews-message {
+  font-style: italic;
+  color: #555;
+  text-align: center;
+}
 
 /* Media Queries for responsiveness */
 @media (max-width: 768px) {

@@ -1,6 +1,7 @@
 const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
 const invCont = {};
+const reviewModel = require("../models/review-model");
 
 /* ***************************
  *  Build inventory by classification view
@@ -33,10 +34,13 @@ invCont.getInventoryDetails = async function (req, res, next) {
     const nav = await utilities.getNav();
     const vehicleHTML = await utilities.buildVehicleHTML(vehicle);
 
+    const reviews = await reviewModel.getReviewsByInventoryId(inv_id);
+
     res.render('inventory/details', {
       title: `${vehicle.inv_make} ${vehicle.inv_model}`,
       nav,
       vehicleHTML,
+      reviews
     });
   } catch (err) {
     next(err); 
@@ -249,10 +253,6 @@ invCont.getInventoryJSON = async (req, res, next) => {
       });
     }
   };
-/* *******************************
-* Fetch reviews along with inv details ()
-* ******************************* */
-  
 
 module.exports = invCont;
 

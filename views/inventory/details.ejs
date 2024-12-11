@@ -6,6 +6,24 @@ If logged in, display a form:
 Text area for review input.
 Non-editable "screen name."
 Hidden fields for inventory ID and account ID. -->
-            <%- vehicleHTML %>
+<h1 id="vehicle-title"><%= title %></h1>
+<nav id="vehicle-nav"><%= nav %></nav>
+<div id="vehicle-details"><%= vehicleHTML %></div>
 
+<section id="reviews-section">
+  <h2 id="reviews-title">Reviews</h2>
+  <% if (reviews && reviews.length > 0) { %>
+    <ul id="reviews-list">
+      <% reviews.forEach(review => { %>
+        <li class="review-item">
+          <strong class="review-author"><%= review.screen_name %></strong>
+          <span class="review-date">(on <%= new Date(review.review_date).toLocaleDateString() %>)</span>
+          <p class="review-text"><%= review.review_text %></p>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p id="no-reviews-message">No reviews yet. Be the first to review!</p>
+  <% } %>
+</section>
 
