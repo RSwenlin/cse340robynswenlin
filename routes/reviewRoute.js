@@ -18,9 +18,10 @@ router.post("/add", reviewController.addReview);
 /* *******************************
 * Editing a review(GET and POST)
 * ******************************* */
-
+router.get('/update/:reviewId', reviewController.showUpdateReviewForm)
+router.post('/update/:reviewId', reviewController.updateReview)
 /* *******************************
 * Deleting a review (POST)
 * ******************************* */
-
+router.post('/delete/:reviewId', reviewController, deleteReview)
 module.exports = router;

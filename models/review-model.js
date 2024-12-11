@@ -7,13 +7,12 @@ const pool = require("../database/")
 * add new review.
 * ******************************* */
 async function addReview(review_id, review_text, review_date, inv_id, account_id){
-    try {
-      const sql = "INSERT INTO review (review_text, review_date, inv_id, account_id) VALUES ($1, $2, $3, $4, $5) RETURNING *"
-      return await pool.query(sql, [review_id, review_text, review_date, inv_id, account_id])
-    } catch (error) {
-      return error.message
+      const sql = `
+      INSERT INTO review (review_text, review_date, inv_id, account_id) VALUES ($1, $2, $3, $4, $5) RETURNING *;`;
+      const result = await pool.query(sql, [review_id, review_text, review_date, inv_id, account_id])
+    return result.rows[0];
     }
-  }
+  
 /* *******************************
 * Update existing review.
 * ******************************* */

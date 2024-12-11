@@ -34,7 +34,7 @@ invCont.getInventoryDetails = async function (req, res, next) {
     const nav = await utilities.getNav();
     const vehicleHTML = await utilities.buildVehicleHTML(vehicle);
 
-    const reviews = await reviewModel.getReviewsByInventoryId(inv_id);
+    const reviews = await reviewModel.getReviewsByInventoryId(inventoryId);
 
     res.render('inventory/details', {
       title: `${vehicle.inv_make} ${vehicle.inv_model}`,

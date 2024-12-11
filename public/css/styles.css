@@ -737,12 +737,14 @@ small {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  background-color: white;
 }
 
 .review-item {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
   font-size: 1em;
+  background-color: white;
 }
 
 /* Review Author and Date Styling */
@@ -755,6 +757,7 @@ small {
   font-size: 0.9em;
   color: #666;
   margin-left: 5px;
+  background-color: white;
 }
 
 /* Review Text Styling */
@@ -763,6 +766,7 @@ small {
   font-size: 1em;
   line-height: 1.5;
   color: #333;
+  background-color: white;
 }
 
 /* No Reviews Message Styling */
