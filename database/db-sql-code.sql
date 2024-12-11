@@ -249,6 +249,10 @@ CREATE TABLE IF NOT EXISTS public.review (
   inv_id integer NOT NULL,
   account_id integer NOT NULL,
   CONSTRAINT review_pkey PRIMARY KEY (review_id)
+  CONSTRAINT fk_inventory FOREIGN KEY (inv_id)
+    REFERENCES public.inventory (inv_id),
+  CONSTRAINT fk_account FOREIGN KEY (account_id)
+    REFERENCES public.account (account_id)
 );
 
 ALTER TABLE IF EXISTS public.reviews

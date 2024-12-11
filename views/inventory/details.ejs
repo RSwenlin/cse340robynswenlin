@@ -6,22 +6,59 @@ If logged in, display a form:
 Text area for review input.
 Non-editable "screen name."
 Hidden fields for inventory ID and account ID. -->
-            <%- vehicleHTML %>
 
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { res.redirect('/') } %>
 
-            <section id="reviews-section">
-                <h2 id="reviews-title">Reviews</h2>
-                <% if (reviews && reviews.length > 0) { %>
-                  <ul id="reviews-list">
-                    <% reviews.forEach(review => { %>
-                      <li class="review-item">
-                        <strong class="review-author"><%= review.screen_name %></strong>
-                        <span class="review-date">(on <%= new Date(review.review_date).toLocaleDateString() %>)</span>
-                        <p class="review-text"><%= review.review_text %></p>
-                      </li>
-                    <% }); %>
-                  </ul>
-                <% } else { %>
-                  <p id="no-reviews-message">No reviews yet. Be the first to review!</p>
-                <% } %>
-              </section>
+<%- messages() %>
+
+<%- vehicleHTML %>
+
+<div>
+  <h2>Customer Reviews</h2>
+  
+  <% if (reviewList && reviewList.length > 0) { %>
+    <div class="reviews-container">
+      <ul>
+        <% reviewList.forEach((review) => { %>
+          <li>
+            <strong><%= review.screen_name %>:</strong>
+            <p><%= review.review_text %></p>
+            <small><%= new Date(review.review_date).toLocaleDateString() %></small>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+  <% } else { %>
+    <p>No reviews yet. Be the first to write one!</p>
+  <% } %>
+</div>
+
+<div>
+  <% if (loggedin) { %>
+    <h2>Add Your Own Review</h2>
+    <form action="/inv/detail/review" method="post">
+      <fieldset>
+        <legend>New Review</legend>
+        
+        <!-- Hidden fields for inventory ID and account ID -->
+        <input type="hidden" name="inv_id" value="<%= vehicleData.inv_id %>">
+        <input type="hidden" name="account_id" value="<%= locals.accountData.account_id %>">
+
+        <!-- Display the screen name (non-editable) -->
+        <label for="screenName">Screen Name:</label>
+        <input type="text" id="screenName" value="<%= locals.accountData.screen_name %>" readonly>
+
+        <!-- Text area for the review -->
+        <label for="reviewText">Your Review:</label>
+        <textarea id="reviewText" name="review_text" rows="4" required></textarea>
+
+        <!-- Submit button -->
+        <button type="submit">Submit Review</button>
+      </fieldset>
+    </form>
+  <% } else { %>
+    <p>Please <a href="/account/login">log in</a> to write a review.</p>
+  <% } %>
+</div>

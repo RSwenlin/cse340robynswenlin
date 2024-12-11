@@ -202,6 +202,8 @@ nav a {
 }
 .vehicle-detail {
   background-color: white;
+  padding: 20px;
+  border: #007BFF;
 
 }
 

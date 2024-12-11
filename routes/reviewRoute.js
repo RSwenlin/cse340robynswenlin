@@ -23,5 +23,6 @@ router.post('/update/:reviewId', reviewController.updateReview)
 /* *******************************
 * Deleting a review (POST)
 * ******************************* */
-router.post('/delete/:reviewId', reviewController, deleteReview)
+router.post('/delete/:reviewId', reviewController.deleteReview)
+
 module.exports = router;

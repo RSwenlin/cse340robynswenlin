@@ -34,22 +34,33 @@ res.redirect(`/inv/detail/${inv_id}`);
 * ******************************* */
 async function showUpdateReviewForm(req, res) {
     let nav = await utilities.getNav()
-    const reviewId = req.params;
+    const { reviewId } = req.params;
     const review = await reviewModel.getReviewsByInventoryId(reviewId)
-    res.render('reviews/update-review', { review})
+    res.render('reviews/update-review', { review, nav})
 }
 async function updateReview(req, res) {
-    const reviewId = req.params;
-    const review_text = req.body;
+    const reviewId = req.params.reviewId
+    const review_text = req.body.review_text
+    const inventoryId = req.body.inventoryId
 
-    const updateReview = await reviewModel.updateReview(reviewId, review_text)
-    res.redirect(`/inv/detail/${updatedReview.inventoryId}`)
+     await reviewModel.updateReview(reviewId, review_text)
+   
+     res.redirect(`/inv/detail/${inventoryId}`)
 }
 
 /* *******************************
 * Deleting a review ()
 * ******************************* */
+async function deleteReview(req, res) {
+    let nav = await utilities.getNav()
+    const reviewId = req.params.reviewId
+    const inventoryId = req.body.inventoryId
 
+    await reviewModel.deleteReview(reviewId)
+    
+    res.redirect(`/inv/detail/${inventoryId}`)
+
+}
 
 /* *******************************
 * Fetching reviews ()
@@ -57,7 +68,8 @@ async function updateReview(req, res) {
 * ******************************* */
 module.exports = {
 addReview,
-//updateReview,
-//deleteReview
+updateReview,
+showUpdateReviewForm,
+deleteReview
 
 }
