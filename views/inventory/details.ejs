@@ -18,10 +18,10 @@ Hidden fields for inventory ID and account ID. -->
 <div>
   <h2>Customer Reviews</h2>
   
-  <% if (reviewList && reviewList.length > 0) { %>
+  <% if (reviews && reviews.length > 0) { %>
     <div class="reviews-container">
       <ul>
-        <% reviewList.forEach((review) => { %>
+        <% reviews.forEach((review) => { %>
           <li>
             <strong><%= review.screen_name %>:</strong>
             <p><%= review.review_text %></p>
@@ -36,7 +36,7 @@ Hidden fields for inventory ID and account ID. -->
 </div>
 
 <div>
-  <% if (loggedin) { %>
+  <% if (locals.loggedin) { %>
     <h2>Add Your Own Review</h2>
     <form action="/inv/detail/review" method="post">
       <fieldset>
